@@ -1,24 +1,50 @@
 package no.nav.k9
 
 import io.ktor.application.*
+import io.ktor.http.ContentType
+import io.ktor.http.HttpStatusCode
 import io.ktor.request.httpMethod
 import io.ktor.request.uri
 import io.ktor.response.respondText
 import io.ktor.routing.Routing
 import io.ktor.routing.get
 import io.ktor.util.KtorExperimentalAPI
+import no.nav.k9.utils.DiagnosekodeUtil
 import org.slf4j.LoggerFactory
+import com.google.gson.Gson
+import no.nav.k9.extensions.safeSubList
+import no.nav.k9.extensions.getMatchingEntries
+import no.nav.syfo.sm.Diagnosekoder
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 private val logger = LoggerFactory.getLogger("no.nav.k9.DiagnosekodeApi")
 
+val diagnosekoder = DiagnosekodeUtil.transformValues(Diagnosekoder.icd10)
+
 @KtorExperimentalAPI
 fun Application.DiagnosekodeApi() {
     install(Routing) {
-        get("/test") {
+        get("/diagnosekoder") {
             logger.info("${call.request.httpMethod.value}@${call.request.uri}")
-            call.respondText { "test" }
+
+            val query = call.request.queryParameters["query"]
+            var max = call.request.queryParameters["max"]?.toIntOrNull()
+
+            if (query != null) {
+                val matches = diagnosekoder.getMatchingEntries(query)
+                val diagnoseList = matches.values.toList().safeSubList(0, max)
+                call.respondText(
+                    contentType = ContentType.Application.Json,
+                    status = HttpStatusCode.OK,
+                    text = Gson().toJson(diagnoseList)
+                )
+            } else {
+                call.respondText(
+                    status = HttpStatusCode.BadRequest,
+                    text = "No query parameter was specified"
+                )
+            }
         }
     }
 }
