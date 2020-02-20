@@ -27,12 +27,14 @@ jobs:
         env:
           DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/diagnosekode-api
         run: |
+          echo "::set-env name=IMAGE::$DOCKER_IMAGE:$(date "+%Y.%m.%d")-$(git rev-parse --short HEAD)"
           echo "::set-env name=LATEST::$DOCKER_IMAGE:latest"
       - name: Bygge Docker image
-        run: docker build . --pull --tag $LATEST
+        run: docker build . --pull --tag $IMAGE --tag $LATEST
       - name: Laste opp Docker image
         run: |
           echo "$GITHUB_TOKEN" | docker login --username "x-access-token" --password-stdin https://docker.pkg.github.com
           docker push $LATEST
+          docker push $IMAGE
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
