@@ -1,0 +1,40 @@
+name: Docker Image
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
+      - 'LICENCE'
+      - 'CODEOWNERS'
+    branches:
+      - master
+
+jobs:
+  docker-deploy:
+    name: Laste opp docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hente kode
+        uses: actions/checkout@v1
+      - name: Sette opp Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11.x'
+      - name: Bygge JAR
+        run: ./mvnw clean package
+        env:
+          GITHUB_USERNAME: x-access-token
+          GITHUB_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+      - name: Sette Docker- navn og tag
+        env:
+          DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/diagnosekode-api
+        run: |
+          echo "::set-env name=LATEST::$DOCKER_IMAGE:latest"
+      - name: Bygge Docker image
+        run: docker build . --pull --tag $LATEST
+      - name: Laste opp Docker image
+        run: |
+          echo "$GITHUB_TOKEN" | docker login --username "x-access-token" --password-stdin https://docker.pkg.github.com
+          docker push $LATEST
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
