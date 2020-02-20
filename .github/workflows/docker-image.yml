@@ -5,6 +5,7 @@ on:
       - '.gitignore'
       - 'LICENCE'
       - 'CODEOWNERS'
+      - '*.md'
     branches:
       - master
 
