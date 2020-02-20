@@ -22,6 +22,8 @@ jobs:
           java-version: '11.x'
       - name: Bygge JAR
         run: mvn clean package --settings ./.m2/settings.xml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Sette Docker- navn og tag
         env:
           DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/diagnosekode-api
