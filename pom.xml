@@ -126,6 +126,11 @@
             <id>jcenter</id>
             <url>https://jcenter.bintray.com</url>
         </repository>
+        <repository>
+            <id>github</id>
+            <name>GitHub navikt Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/navikt/syfosm-common</url>
+        </repository>
     </repositories>
 
     <licenses>
