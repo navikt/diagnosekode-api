@@ -51,5 +51,15 @@ fun Application.DiagnosekodeApi() {
                 )
             }
         }
+        
+        get("/isAlive") {
+            logger.debug("alive")
+            call.respondText("ALIVE")
+        }
+    
+        get("/isReady") {
+            logger.debug("ready")
+            call.respondText("READY")
+        }
     }
 }
