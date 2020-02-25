@@ -26,9 +26,9 @@ spec:
   resources:
     limits:
       cpu: 500m
-      memory: 64Mi
+      memory: 256Mi
     requests:
       cpu: 200m
-      memory: 32Mi
+      memory: 128Mi
   ingresses:
     - "https://app-q1.adeo.no/diagnosekode-api"
