@@ -31,4 +31,4 @@ spec:
       cpu: 200m
       memory: 128Mi
   ingresses:
-    - "https://app-q1.adeo.no/diagnosekode-api"
+    - "https://app-q1.adeo.no/diagnosekoder"
