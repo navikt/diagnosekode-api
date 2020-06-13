@@ -11,6 +11,7 @@ import io.ktor.util.KtorExperimentalAPI
 import no.nav.k9.utils.DiagnosekodeUtil
 import org.slf4j.LoggerFactory
 import com.google.gson.Gson
+import io.ktor.features.CORS
 import io.ktor.http.HttpStatusCode
 import no.nav.k9.extensions.safeSubList
 import no.nav.k9.extensions.getMatchingEntries
@@ -24,6 +25,10 @@ val diagnosekoder = DiagnosekodeUtil.transformValues(Diagnosekoder.icd10)
 
 @KtorExperimentalAPI
 fun Application.DiagnosekodeApi() {
+    install(CORS) {
+        anyHost()
+    }
+
     install(Routing) {
         get("/diagnosekoder") {
             logger.info("${call.request.httpMethod.value}@${call.request.uri}")
