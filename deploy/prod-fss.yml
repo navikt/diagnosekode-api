@@ -34,4 +34,4 @@ spec:
     - "https://app.adeo.no/diagnosekoder"
   env:
     - name: CORS_ALLOW_LIST
-      value: https://app-q1.adeo.no
+      value: https://app.adeo.no
