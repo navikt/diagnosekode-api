@@ -7,7 +7,6 @@ import io.ktor.request.uri
 import io.ktor.response.respondText
 import io.ktor.routing.Routing
 import io.ktor.routing.get
-import io.ktor.util.KtorExperimentalAPI
 import no.nav.k9.utils.DiagnosekodeUtil
 import org.slf4j.LoggerFactory
 import com.google.gson.Gson
@@ -25,7 +24,6 @@ private val logger = LoggerFactory.getLogger("no.nav.k9.DiagnosekodeApi")
 
 val diagnosekoder = DiagnosekodeUtil.transformValues(Diagnosekoder.icd10)
 
-@KtorExperimentalAPI
 fun Application.DiagnosekodeApi() {
     install(CORS) {
         method(HttpMethod.Options)
