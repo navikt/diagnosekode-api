@@ -8,6 +8,7 @@ on:
       - '*.md'
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
   docker-deploy:
@@ -46,6 +47,7 @@ jobs:
           CLUSTER: dev-fss
           RESOURCE: deploy/dev-fss.yml
       - name: Deploy til prod
+        if: github.ref == 'refs/heads/master'
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.DEPLOY_KEY }}
