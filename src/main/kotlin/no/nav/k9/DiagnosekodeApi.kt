@@ -23,6 +23,7 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 private val logger = LoggerFactory.getLogger("no.nav.k9.DiagnosekodeApi")
 
 val diagnosekoder = DiagnosekodeUtil.transformValues(Diagnosekoder.icd10)
+private val diagnoseKodePattern = ".\\d{3}"
 
 fun Application.DiagnosekodeApi() {
     install(CORS) {
@@ -43,7 +44,9 @@ fun Application.DiagnosekodeApi() {
             var max = call.request.queryParameters["max"]?.toIntOrNull()
 
             if (query != null) {
-                val matches = diagnosekoder.getMatchingEntries(query)
+                val diagnoseKode = diagnoseKodePattern.toRegex().find(query)?.value
+
+                val matches = diagnosekoder.getMatchingEntries(diagnoseKode ?: query)
                 val diagnoseList = matches.values.toList().safeSubList(0, max)
                 logger.info("Returnerer {} diagnosekoder", diagnoseList.size)
                 call.respondText(
