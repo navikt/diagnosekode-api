@@ -45,6 +45,7 @@ fun Application.DiagnosekodeApi() {
             if (query != null) {
                 val matches = diagnosekoder.getMatchingEntries(query)
                 val diagnoseList = matches.values.toList().safeSubList(0, max)
+                logger.info("Returnerer {} diagnosekoder", diagnoseList.size)
                 call.respondText(
                     contentType = ContentType.Application.Json,
                     status = HttpStatusCode.OK,
