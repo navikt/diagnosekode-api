@@ -32,6 +32,3 @@ spec:
       memory: 128Mi
   ingresses:
     - "https://app.adeo.no/diagnosekoder"
-  env:
-    - name: CORS_ALLOW_LIST
-      value: https://app.adeo.no

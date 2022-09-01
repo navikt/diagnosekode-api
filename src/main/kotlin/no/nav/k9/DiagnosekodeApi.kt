@@ -1,39 +1,34 @@
 package no.nav.k9
 
-import io.ktor.application.*
-import io.ktor.http.ContentType
-import io.ktor.request.httpMethod
-import io.ktor.request.uri
-import io.ktor.response.respondText
-import io.ktor.routing.Routing
-import io.ktor.routing.get
-import no.nav.k9.utils.DiagnosekodeUtil
-import org.slf4j.LoggerFactory
 import com.google.gson.Gson
-import io.ktor.features.CORS
-import io.ktor.http.HttpMethod
-import io.ktor.http.HttpStatusCode
-import no.nav.k9.extensions.safeSubList
+import io.ktor.http.*
+import io.ktor.server.application.*
+import io.ktor.server.plugins.cors.routing.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.Routing
+import io.ktor.server.routing.get
 import no.nav.k9.extensions.getMatchingEntries
+import no.nav.k9.extensions.safeSubList
+import no.nav.k9.utils.DiagnosekodeUtil
 import no.nav.syfo.sm.Diagnosekoder
-import java.net.URI
+import org.slf4j.LoggerFactory
 
-fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+fun main(args: Array<String>): Unit = io.ktor.server.jetty.EngineMain.main(args)
 
 private val logger = LoggerFactory.getLogger("no.nav.k9.DiagnosekodeApi")
 
-val diagnosekoder = DiagnosekodeUtil.transformValues(Diagnosekoder.icd10)
+private val diagnosekoder = DiagnosekodeUtil.transformValues(Diagnosekoder.icd10)
 private val diagnoseKodePattern = ".\\d{3}"
 
 fun Application.DiagnosekodeApi() {
     install(CORS) {
-        method(HttpMethod.Options)
-        method(HttpMethod.Get)
-
-        environment.config.property("nav.cors_allow_list").getString().split(',').map { URI.create(it) }.forEach {
-            log.info("Legger til host {} med scheme {}", it.host, it.scheme)
-            host(host = it.authority, schemes = listOf(it.scheme))
-        }
+        allowMethod(HttpMethod.Options)
+        allowHost(
+            host = "adeo.no",
+            schemes = listOf("http", "https"),
+            subDomains = listOf("app-q1, app")
+        )
     }
 
     install(Routing) {
