@@ -32,3 +32,4 @@ spec:
       memory: 128Mi
   ingresses:
     - "https://app-q1.adeo.no/diagnosekoder"
+    - "https://k9-diagnosekode.dev.intern.nav.no"
