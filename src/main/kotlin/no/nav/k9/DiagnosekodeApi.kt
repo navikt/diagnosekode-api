@@ -22,6 +22,7 @@ private val diagnosekoder = DiagnosekodeUtil.transformValues(Diagnosekoder.icd10
 private val diagnoseKodePattern = ".\\d{3}"
 
 fun Application.DiagnosekodeApi() {
+    /*
     install(CORS) {
         allowMethod(HttpMethod.Options)
         allowHost(
@@ -30,7 +31,7 @@ fun Application.DiagnosekodeApi() {
             subDomains = listOf("app-q1", "app")
         )
     }
-
+    */
     install(Routing) {
         get("/diagnosekoder") {
             logger.info("${call.request.httpMethod.value}@${call.request.uri}")
