@@ -14,7 +14,7 @@ import no.nav.k9.utils.DiagnosekodeUtil
 import no.nav.syfo.sm.Diagnosekoder
 import org.slf4j.LoggerFactory
 
-fun main(args: Array<String>): Unit = io.ktor.server.jetty.EngineMain.main(args)
+fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 private val logger = LoggerFactory.getLogger("no.nav.k9.DiagnosekodeApi")
 
