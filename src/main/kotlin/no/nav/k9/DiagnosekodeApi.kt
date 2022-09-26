@@ -27,12 +27,12 @@ fun Application.DiagnosekodeApi() {
         allowHost(
             host = "adeo.no",
             schemes = listOf("http", "https"),
-            subDomains = listOf("app-q1, app")
+            subDomains = listOf("app-q1", "app")
         )
     }
 
     install(Routing) {
-        get("/k9/diagnosekoder") {
+        get("/diagnosekoder") {
             logger.info("${call.request.httpMethod.value}@${call.request.uri}")
 
             val query = call.request.queryParameters["query"]
