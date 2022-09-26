@@ -6,15 +6,14 @@ import io.ktor.server.application.*
 import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
-import io.ktor.server.routing.Routing
-import io.ktor.server.routing.get
+import io.ktor.server.routing.*
 import no.nav.k9.extensions.getMatchingEntries
 import no.nav.k9.extensions.safeSubList
 import no.nav.k9.utils.DiagnosekodeUtil
 import no.nav.syfo.sm.Diagnosekoder
 import org.slf4j.LoggerFactory
 
-fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+fun main(args: Array<String>): Unit = io.ktor.server.jetty.EngineMain.main(args)
 
 private val logger = LoggerFactory.getLogger("no.nav.k9.DiagnosekodeApi")
 
@@ -22,7 +21,6 @@ private val diagnosekoder = DiagnosekodeUtil.transformValues(Diagnosekoder.icd10
 private val diagnoseKodePattern = ".\\d{3}"
 
 fun Application.DiagnosekodeApi() {
-    /*
     install(CORS) {
         allowMethod(HttpMethod.Options)
         allowHost(
@@ -31,7 +29,7 @@ fun Application.DiagnosekodeApi() {
             subDomains = listOf("app-q1", "app")
         )
     }
-    */
+
     install(Routing) {
         get("/diagnosekoder") {
             logger.info("${call.request.httpMethod.value}@${call.request.uri}")
