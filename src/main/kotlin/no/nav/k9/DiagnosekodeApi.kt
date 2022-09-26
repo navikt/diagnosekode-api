@@ -32,7 +32,7 @@ fun Application.DiagnosekodeApi() {
     }
 
     install(Routing) {
-        get("/diagnosekoder") {
+        get("/k9/diagnosekoder") {
             logger.info("${call.request.httpMethod.value}@${call.request.uri}")
 
             val query = call.request.queryParameters["query"]
