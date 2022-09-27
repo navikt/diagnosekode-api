@@ -3,6 +3,7 @@ package no.nav.k9
 import com.google.gson.Gson
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.plugins.callloging.*
 import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
@@ -12,6 +13,7 @@ import no.nav.k9.extensions.safeSubList
 import no.nav.k9.utils.DiagnosekodeUtil
 import no.nav.syfo.sm.Diagnosekoder
 import org.slf4j.LoggerFactory
+import org.slf4j.event.*
 
 fun main(args: Array<String>): Unit = io.ktor.server.jetty.EngineMain.main(args)
 
@@ -21,6 +23,10 @@ private val diagnosekoder = DiagnosekodeUtil.transformValues(Diagnosekoder.icd10
 private val diagnoseKodePattern = ".\\d{3}"
 
 fun Application.DiagnosekodeApi() {
+    install(CallLogging) {
+        level = Level.INFO
+        filter { call -> call.request.path().startsWith("/") }
+    }
     install(CORS) {
         allowMethod(HttpMethod.Options)
         allowHost(
@@ -32,8 +38,6 @@ fun Application.DiagnosekodeApi() {
 
     install(Routing) {
         get("/diagnosekoder") {
-            logger.info("${call.request.httpMethod.value}@${call.request.uri}")
-
             val query = call.request.queryParameters["query"]
             var max = call.request.queryParameters["max"]?.toIntOrNull()
 
