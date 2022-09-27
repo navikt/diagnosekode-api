@@ -24,9 +24,15 @@ private val diagnoseKodePattern = ".\\d{3}"
 
 fun Application.DiagnosekodeApi() {
     install(CallLogging) {
+        logger = logger
         level = Level.INFO
-        filter { call -> call.request.path().startsWith("/") }
+        filter { call ->
+            call.request.path().startsWith("/")
+            !call.request.queryParameters.contains("/internal")
+        }
+        disableDefaultColors()
     }
+
     install(CORS) {
         allowMethod(HttpMethod.Options)
         allowHost(
@@ -60,13 +66,11 @@ fun Application.DiagnosekodeApi() {
             }
         }
 
-        get("/isAlive") {
-            logger.debug("alive")
+        get("/internal/isAlive") {
             call.respondText("ALIVE")
         }
 
-        get("/isReady") {
-            logger.debug("ready")
+        get("/internal/isReady") {
             call.respondText("READY")
         }
     }
