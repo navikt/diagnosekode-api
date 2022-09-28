@@ -6,6 +6,7 @@ on:
       - 'LICENSE'
       - 'CODEOWNERS'
       - '*.md'
+      - '.github/**.yml'
     branches:
       - master
   workflow_dispatch:
