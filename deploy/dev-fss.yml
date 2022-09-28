@@ -10,13 +10,13 @@ spec:
   port: 8300
   team: k9saksbehandling
   liveness:
-    path: /isAlive
+    path: /internal/isAlive
     initialDelay: 5
     timeout: 1
     periodSeconds: 5
     failureThreshold: 10
   readiness:
-    path: /isReady
+    path: /internal/isReady
     initialDelay: 5
     timeout: 1
   replicas:
@@ -32,6 +32,3 @@ spec:
       memory: 128Mi
   ingresses:
     - "https://app-q1.adeo.no/diagnosekoder"
-  env:
-    - name: CORS_ALLOW_LIST
-      value: https://app-q1.adeo.no
