@@ -28,7 +28,7 @@ fun Application.DiagnosekodeApi() {
         level = Level.INFO
         filter { call ->
             call.request.path().startsWith("/")
-            !call.request.queryParameters.contains("/internal")
+            !call.request.path().contains("internal")
         }
         disableDefaultColors()
     }
