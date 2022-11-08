@@ -1,3 +1,3 @@
-FROM ghcr.io/navikt/baseimages/temurin:17
+FROM ghcr.io/navikt/baseimages/temurin:18
 
 COPY target/app.jar ./
