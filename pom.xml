@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <kotlin.version>1.7.10</kotlin.version>
+        <kotlin.version>1.8.21</kotlin.version>
         <ktor.version>2.2.4</ktor.version>
         <logback.classic.version>1.4.6</logback.classic.version>
         <logstash.logback.version>7.3</logstash.logback.version>
