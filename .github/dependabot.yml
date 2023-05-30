@@ -1,16 +1,20 @@
 version: 2
+registries:
+  diagnosekodeapi:
+    type: maven-repository
+    url: https://maven.pkg.github.com/navikt/diagnosekode-api
+    username: x-access-token
+    password: ${{secrets.READER_TOKEN}}
 updates:
-  - package-ecosystem: maven
+  - package-ecosystem: gradle
     directory: "/"
     schedule:
       interval: daily
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 20
+    registries:
+      - diagnosekodeapi
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
       interval: daily
-  - package-ecosystem: docker
-    directory: "/"
-    schedule:
-      interval: daily
-      
+    open-pull-requests-limit: 20
