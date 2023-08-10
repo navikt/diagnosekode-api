@@ -11,7 +11,7 @@
     <properties>
         <kotlin.version>1.8.21</kotlin.version>
         <ktor.version>2.3.1</ktor.version>
-        <logback.classic.version>1.4.6</logback.classic.version>
+        <logback.classic.version>1.4.11</logback.classic.version>
         <logstash.logback.version>7.3</logstash.logback.version>
         <diagnosekoder.version>1.a434402</diagnosekoder.version>
     </properties>
