@@ -1,7 +1,7 @@
 package no.nav.k9.utils
 
 import no.nav.k9.domain.ICD10Diagnosekode
-import no.nav.syfo.sm.Diagnosekoder
+import no.nav.helse.diagnosekoder.Diagnosekoder
 
 object DiagnosekodeUtil {
     fun transformValues(icd10: Map<String, Diagnosekoder.ICD10>): Map<String, ICD10Diagnosekode> {

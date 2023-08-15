@@ -11,7 +11,7 @@ import io.ktor.server.routing.*
 import no.nav.k9.extensions.getMatchingEntries
 import no.nav.k9.extensions.safeSubList
 import no.nav.k9.utils.DiagnosekodeUtil
-import no.nav.syfo.sm.Diagnosekoder
+import no.nav.helse.diagnosekoder.Diagnosekoder
 import org.slf4j.LoggerFactory
 import org.slf4j.event.*
 
