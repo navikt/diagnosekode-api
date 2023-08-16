@@ -13,7 +13,7 @@
         <ktor.version>2.3.1</ktor.version>
         <logback.classic.version>1.4.6</logback.classic.version>
         <logstash.logback.version>7.3</logstash.logback.version>
-        <diagnosekoder.version>1.a434402</diagnosekoder.version>
+        <diagnosekoder.version>1.2023.0</diagnosekoder.version>
     </properties>
 
     <dependencies>
@@ -34,7 +34,7 @@
         </dependency>
         <dependency>
             <groupId>no.nav.helse</groupId>
-            <artifactId>syfosm-common-diagnosis-codes</artifactId>
+            <artifactId>diagnosekoder</artifactId>
             <version>${diagnosekoder.version}</version>
         </dependency>
         <dependency>
@@ -142,7 +142,7 @@
         <repository>
             <id>github</id>
             <name>GitHub navikt Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/navikt/syfosm-common</url>
+            <url>https://maven.pkg.github.com/navikt/diagnosekoder</url>
         </repository>
         <repository>
             <id>jitpack.io</id>
