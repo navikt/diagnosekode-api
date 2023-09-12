@@ -40,7 +40,7 @@ jobs:
       - name: Bygge Docker image
         run: docker build . --pull --tag $IMAGE --tag $LATEST
 
-      - uses: docker/login-action@v2
+      - uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
