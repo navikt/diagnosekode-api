@@ -1,3 +1,5 @@
 # diagnosekode-api
 
-API for å hente ut diagnosekoder fra ICD10-registeret som publisert i https://github.com/navikt/syfosm-common.
+API for å søke opp diagnosekoder fra ICD10-registeret.
+
+Kodene blir hentet fra kotlin pakke som publiseres fra https://github.com/navikt/diagnosekoder.
