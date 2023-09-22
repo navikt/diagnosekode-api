@@ -15,6 +15,9 @@ jobs:
   docker-deploy:
     name: Laste opp docker image
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Hente kode
         uses: actions/checkout@v4
